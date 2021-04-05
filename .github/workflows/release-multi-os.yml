@@ -84,34 +84,37 @@ jobs:
           tag: ${{ github.ref }}
           overwrite: true
 
-# Remove for now because it is broken
-#
-#  build-macos:
-#    name: Upload Release Asset macOS
-#    runs-on: macos-latest
-#    strategy:
-#      matrix:
-#        python-version: [ 3.6 ]
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#      - name: Set up Python ${{ matrix.python-version }}
-#        uses: actions/setup-python@v2
-#        with:
-#          python-version: ${{ matrix.python-version }}
-#      - name: Install python dependencies
-#        run: |
-#          python -m pip install --upgrade pip
-#          pip install -r requirements.txt
-#      - name: Run fbs
-#        run: |
-#          sudo fbs freeze
-#          sudo fbs installer
-#      - name: Upload binaries to release
-#        uses: svenstaro/upload-release-action@v2
-#        with:
-#          repo_token: ${{ secrets.GITHUB_TOKEN }}
-#          file: target/dsgui.dmg
-#          asset_name: dsgui.dmg
-#          tag: ${{ github.ref }}
-#          overwrite: true
+  build-macos:
+    name: Upload Release Asset macOS
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        python-version: [ 3.6 ]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      # TODO: Remove when fbs fixes this issue
+      - name: Monkey patch
+        run: |
+          brew install dos2unix
+          find venv -type f -print0 | xargs -0 dos2unix
+      - name: Run fbs
+        run: |
+          fbs freeze
+          fbs installer
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/dsgui.dmg
+          asset_name: dsgui.dmg
+          tag: ${{ github.ref }}
+          overwrite: true

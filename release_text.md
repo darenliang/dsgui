@@ -1,1 +1,1 @@
-Remove macOS workflow
+Fix macOS workflow

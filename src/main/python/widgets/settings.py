@@ -1,10 +1,8 @@
-import subprocess
-
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
 from gui.settings import Ui_settings
-from utils import config, message
+from utils import config, message, process
 
 
 class Settings(QWidget):
@@ -35,13 +33,7 @@ class Settings(QWidget):
         if channel_checkbox:
             opts.append("-d")
 
-        result = subprocess.run(
-            opts,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            stdin=subprocess.PIPE,
-            shell=True
-        )
+        result = process.run(opts)
 
         if result.returncode == 0:
             message.create(

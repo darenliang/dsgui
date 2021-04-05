@@ -1,6 +1,5 @@
 import datetime
 import os
-import subprocess
 import webbrowser
 
 from PyQt5.QtCore import *
@@ -9,7 +8,7 @@ from PyQt5.QtWidgets import *
 
 from gui.about import Ui_about
 from gui.main import Ui_mainWindow
-from utils import config, model, thread, message
+from utils import config, model, thread, message, process
 from widgets.settings import Settings
 
 LOCAL_TIMEZONE = datetime.datetime.now(
@@ -81,12 +80,8 @@ class MainWindow(QMainWindow):
         if not ok or text == "" or text == filename:
             return
 
-        result = subprocess.run(
-            [config.dscli_bin, "mv", filename, text],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            stdin=subprocess.PIPE,
-            shell=True
+        result = process.run(
+            [config.dscli_bin, "mv", filename, text]
         )
 
         if result.returncode != 0:
@@ -118,12 +113,8 @@ class MainWindow(QMainWindow):
         if reply == QMessageBox.No:
             return
 
-        result = subprocess.run(
-            [config.dscli_bin, "rm", filename],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            stdin=subprocess.PIPE,
-            shell=True
+        result = process.run(
+            [config.dscli_bin, "rm", filename]
         )
 
         if result.returncode != 0:
@@ -169,13 +160,8 @@ class MainWindow(QMainWindow):
         self.busy = True
 
         def download_file_impl(progress_callback):
-            self.popen = subprocess.Popen(
-                [config.dscli_bin, "dl", filename, download_location, "-d"],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                stdin=subprocess.PIPE,
-                universal_newlines=True,
-                shell=True
+            self.popen = process.Popen(
+                [config.dscli_bin, "dl", filename, download_location, "-d"]
             )
 
             for stdout_line in iter(self.popen.stdout.readline, ""):
@@ -230,13 +216,8 @@ class MainWindow(QMainWindow):
         self.busy = True
 
         def upload_file_impl(progress_callback):
-            self.popen = subprocess.Popen(
-                [config.dscli_bin, "up", filename, text, "-d"],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                stdin=subprocess.PIPE,
-                universal_newlines=True,
-                shell=True
+            self.popen = process.Popen(
+                [config.dscli_bin, "up", filename, text, "-d"]
             )
 
             for stdout_line in iter(self.popen.stdout.readline, ""):
@@ -323,12 +304,8 @@ class MainWindow(QMainWindow):
 
     @staticmethod
     def refresh_list_impl(progress_callback):
-        result = subprocess.run(
-            [config.dscli_bin, "ls", "-l"],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            stdin=subprocess.PIPE,
-            shell=True
+        result = process.run(
+            [config.dscli_bin, "ls", "-l"]
         )
 
         if result.returncode != 0:
@@ -344,11 +321,17 @@ class MainWindow(QMainWindow):
 
         files = []
         for i, line in enumerate(lines):
-            filesize, timestamp, filename = line.split(" ", 2)
-            timestamp = datetime.datetime.fromtimestamp(
-                int(timestamp),
-                tz=LOCAL_TIMEZONE
-            ).strftime("%Y/%m/%d %H:%M:%S")
+            if line == "":
+                continue
+
+            try:
+                filesize, timestamp, filename = line.split(" ", 2)
+                timestamp = datetime.datetime.fromtimestamp(
+                    int(timestamp),
+                    tz=LOCAL_TIMEZONE
+                ).strftime("%Y/%m/%d %H:%M:%S")
+            except:
+                break
 
             files.append((filename, filesize, timestamp))
 

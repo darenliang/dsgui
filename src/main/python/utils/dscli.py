@@ -10,7 +10,7 @@ from pathlib import Path
 
 import requests
 
-from utils import config
+from utils import config, process
 
 bin_folder = f"{Path.home().as_posix()}/.dsgui/bin"
 
@@ -33,12 +33,8 @@ def setup():
     release_info = response.json()
 
     if path.exists(f"{bin_folder}/dscli{extension}"):
-        result = subprocess.run(
-            [f"{bin_folder}/dscli{extension}", "-v"],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            stdin=subprocess.PIPE,
-            shell=True
+        result = process.run(
+            [f"{bin_folder}/dscli{extension}", "-v"]
         )
         version = result.stdout.decode()[len("dscli version "):]
         if version == config.dscli_version:
@@ -61,7 +57,7 @@ def setup():
         with zipfile.ZipFile(f"{bin_folder}/{artifact_name}", "r") as file:
             file.extractall(bin_folder)
     else:
-        with tarfile.TarFile(f"{bin_folder}/{artifact_name}", "r:gz") as file:
+        with tarfile.open(f"{bin_folder}/{artifact_name}", "r:gz") as file:
             file.extractall(bin_folder)
 
     artifact_path = pathlib.Path(f"{bin_folder}/{artifact_name}")
