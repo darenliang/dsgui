@@ -2,7 +2,7 @@ on:
   push:
     # Sequence of patterns matched against refs/tags
     tags:
-    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 name: Release Multi Platform
 
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-16.04
     strategy:
       matrix:
-        python-version: [3.6]
+        python-version: [ 3.6 ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -49,8 +49,8 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: target/fbs_tutorial_app.deb
-          asset_name: fbs_tutorial_app.deb
+          file: target/dsgui.deb
+          asset_name: dsgui.deb
           tag: ${{ github.ref }}
           overwrite: true
 
@@ -59,7 +59,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        python-version: [3.6]
+        python-version: [ 3.6 ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -79,8 +79,8 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: target/fbs_tutorial_app.dmg
-          asset_name: fbs_tutorial_app.dmg
+          file: target/dsgui.dmg
+          asset_name: dsgui.dmg
           tag: ${{ github.ref }}
           overwrite: true
 
@@ -89,7 +89,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        python-version: [3.6]
+        python-version: [ 3.6 ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -109,7 +109,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: target/fbs_tutorial_appSetup.exe
-          asset_name: fbs_tutorial_appSetup.exe
+          file: target/dsguiSetup.exe
+          asset_name: dsguiSetup.exe
           tag: ${{ github.ref }}
           overwrite: true
