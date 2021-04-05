@@ -1,1 +1,1 @@
-Use sudo for macOS builds
+Remove macOS workflow
