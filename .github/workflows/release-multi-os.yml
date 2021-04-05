@@ -73,8 +73,8 @@ jobs:
           pip install -r requirements.txt
       - name: Run fbs
         run: |
-          fbs freeze
-          fbs installer
+          sudo fbs freeze
+          sudo fbs installer
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:

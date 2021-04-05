@@ -1,1 +1,1 @@
-Initial release
+Use sudo for macOS builds
