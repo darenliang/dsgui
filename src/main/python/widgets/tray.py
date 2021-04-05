@@ -57,14 +57,12 @@ class SystemTray(QSystemTrayIcon):
     def open_main_window(self):
         if not self.main_window.isHidden():
             self.main_window.activateWindow()
-            self.main_window.refresh_list()
             return
 
         if self.settings_dialog is not None:
             self.settings_dialog.close()
 
         self.main_window.show()
-        self.main_window.refresh_list()
 
     def open_settings(self):
         if self.main_window is not None:

@@ -1,1 +1,1 @@
-Fix macOS workflow
+Release
