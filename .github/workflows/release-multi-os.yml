@@ -104,9 +104,9 @@ jobs:
       # TODO: Remove when fbs fixes this issue
       - name: Monkey patch
         run: |
-          find $(RUNNER_TOOL_CACHE)/Python -name create-dmg -type f -exec chmod +x {} +
+          find $RUNNER_TOOL_CACHE/Python -name create-dmg -type f -exec chmod +x {} +
           brew install dos2unix
-          find $(RUNNER_TOOL_CACHE)/Python -type f -print0 | xargs -0 dos2unix
+          find $RUNNER_TOOL_CACHE/Python -type f -print0 | xargs -0 dos2unix
       - name: Run fbs
         run: |
           fbs freeze
