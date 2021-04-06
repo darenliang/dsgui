@@ -1,5 +1,10 @@
 # dsgui: A gui frontend for dscli
 
+Dsgui is a gui frontend for [dscli](https://github.com/darenliang/dsgui),
+allowing easy file uploads and downloads though an interactive interface.
+
+![gui](assets/gui.png)
+
 ## Downloads
 
 Pre-built installers for Windows, macOS and Ubuntu can be found here:
