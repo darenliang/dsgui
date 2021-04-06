@@ -1,1 +1,1 @@
-Release
+Switch to dark theme using QDarkStyleSheet

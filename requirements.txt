@@ -1,3 +1,4 @@
 fbs
 requests
+qdarkstyle
 PyQt5==5.15.2
