@@ -6,7 +6,7 @@ from utils import dscli
 from widgets.tray import SystemTray
 
 if __name__ == '__main__':
-    appctxt = ApplicationContext()  # 1. Instantiate ApplicationContext
+    appctxt = ApplicationContext()
 
     #
     # Setup dscli
