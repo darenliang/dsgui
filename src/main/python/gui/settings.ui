@@ -43,7 +43,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="userTokenLineEdit"/>
+      <widget class="QLineEdit" name="userTokenLineEdit">
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QLabel" name="serverIDLabel">
