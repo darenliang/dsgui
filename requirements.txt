@@ -1,4 +1,4 @@
 fbs
 requests
 qdarkstyle
-PyQt5==5.15.2
+PyQt5==5.15.4

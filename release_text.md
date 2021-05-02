@@ -1,1 +1,1 @@
-Switch to dark theme using QDarkStyleSheet
+Update PyQt5
