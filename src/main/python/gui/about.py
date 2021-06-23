@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_about(object):
     def setupUi(self, about):
         about.setObjectName("about")
-        about.resize(250, 110)
+        about.resize(260, 120)
         self.label = QtWidgets.QLabel(about)
         self.label.setGeometry(QtCore.QRect(125, 10, 110, 30))
         font = QtGui.QFont()
@@ -22,7 +22,7 @@ class Ui_about(object):
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(about)
-        self.label_2.setGeometry(QtCore.QRect(125, 45, 110, 45))
+        self.label_2.setGeometry(QtCore.QRect(125, 45, 121, 51))
         self.label_2.setObjectName("label_2")
         self.imageLabel = QtWidgets.QLabel(about)
         self.imageLabel.setGeometry(QtCore.QRect(15, 15, 90, 82))

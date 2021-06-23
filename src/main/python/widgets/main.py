@@ -326,6 +326,7 @@ class MainWindow(QMainWindow):
 
             try:
                 filesize, timestamp, filename = line.split(" ", 2)
+                filesize = int(filesize)
                 timestamp = datetime.datetime.fromtimestamp(
                     int(timestamp),
                     tz=LOCAL_TIMEZONE

@@ -1,1 +1,1 @@
-Update PyQt5
+Fixed issue with sorting file sizes
