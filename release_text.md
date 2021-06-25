@@ -1,1 +1,1 @@
-Fixed issue with sorting file sizes
+Update dscli version
