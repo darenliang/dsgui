@@ -38,7 +38,7 @@
      <item>
       <widget class="QLabel" name="userTokenLabel">
        <property name="text">
-        <string>Discord User Token:</string>
+        <string>Discord Token:</string>
        </property>
       </widget>
      </item>
@@ -46,6 +46,13 @@
       <widget class="QLineEdit" name="userTokenLineEdit">
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="botBox">
+       <property name="text">
+        <string>Is this token for a Bot?</string>
        </property>
       </widget>
      </item>

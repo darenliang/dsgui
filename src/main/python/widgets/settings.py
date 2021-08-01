@@ -18,6 +18,7 @@ class Settings(QWidget):
     def submit(self):
         token = self.ui.userTokenLineEdit.text().strip()
         server_id = self.ui.serverIDLineEdit.text().strip()
+        bot_checkbox = self.ui.botBox.isChecked()
         channel_checkbox = self.ui.checkBox.isChecked()
 
         if token == "" or server_id == "":
@@ -32,6 +33,9 @@ class Settings(QWidget):
 
         if channel_checkbox:
             opts.append("-d")
+
+        if bot_checkbox:
+            opts.append("-b")
 
         result = process.run(opts)
 
