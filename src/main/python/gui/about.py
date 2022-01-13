@@ -35,6 +35,6 @@ class Ui_about(object):
         _translate = QtCore.QCoreApplication.translate
         about.setWindowTitle(_translate("about", "About"))
         self.label.setText(_translate("about", "dsgui"))
-        self.label_2.setText(_translate("about", "Copyright (c) 2021\n"
+        self.label_2.setText(_translate("about", "Copyright (c) 2022\n"
 "Daren Liang\n"
 "daren@darenliang.com"))
