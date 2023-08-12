@@ -1,1 +1,1 @@
-Fix Ubuntu build
+Bump ubuntu version to 20.04
